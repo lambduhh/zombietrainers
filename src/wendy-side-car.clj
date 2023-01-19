@@ -86,15 +86,57 @@
 
 ;; => [3 12 21]
 
-; Next, Let's use loop with cas over a collection.
+; 1/18/23 OK, lets solve some crap. Write it new:
 
+; what do i have? a collection of ints
 
+; what's the first thing i want? the first int, second int, and rest of coll
 
-I want a collection.
+(let [coll '[5 3 4 2 1]
+      [first-int next-int & the-rest] coll]
+  the-rest)
+;; => (4 2 1)
 
-(def seq-data '[5 3 4 2 1])
+; what do i have? first-int, next-int, and the rest of a coll
 
-(first seq-data)
-;; => 5
+; now what do i want? result of which int is smaller / bigger
 
-I 
+(let [coll '[5 3 4 2 1]
+      [first-int next-int & the-rest] coll]
+  (cas first-int next-int))
+;; => [3 5]
+
+; what do i have? result of which int is smaller / bigger
+
+; now what do I want? a result bucket 
+
+(let [coll '[5 3 4 2 1]
+      [first-int next-int & the-rest] coll
+      result []] 
+  (cas first-int next-int))
+;; => [3 5]
+
+; what do I have? my result bucket & the result of cas
+
+; now what do i need? the smallest item we found earlier
+
+(let [coll '[5 3 4 2 1]
+      [first-int next-int & the-rest] coll
+      result []]
+  (let [[x y] (cas first-int next-int)]
+    x))
+;; => 3 
+
+; what do I have? the smallest item we found earlier
+
+; now what do I need? my result bucket with the smallest item in it
+
+(let [coll '[5 3 4 2 1]
+      [first-int next-int & the-rest] coll
+      result []]
+  (let [[x y] (cas first-int next-int)
+        new-coll (conj [] x)]
+    new-coll))
+;; => [3]
+
+; now what do I need? a collection with y at the front and the rest in the back...
