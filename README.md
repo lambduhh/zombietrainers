@@ -1,2 +1,2 @@
 # zombietrainers
-An empty app... for nowwwww
+Practice Repo for learning with Lambduhh
