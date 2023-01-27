@@ -1,8 +1,19 @@
 (ns katas.bs)
 
-;; Write me a function that takes a sequential data structure of integers and returns them in order
+;; Write a function that takes a sequential data structure of integers and returns them in order
 ;; do not use built in sort function!
 
-(def tommy-solution nil)
+;; Tommy solution
 
-(def wendy-solution nil)
+
+
+;; Wendy solution
+
+
+(comment
+  ;
+  (def data1 [8 39 0 8 100 39 7 30 0 0 0 2 1])
+
+  ;; call your final function here on data1 to ensure it works
+
+  )
