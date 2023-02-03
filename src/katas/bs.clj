@@ -5,6 +5,31 @@
 
 ;; Tommy solution
 
+(defn take-smallest-out
+  "this function helps reduce the size of our initial-coll later"
+  [smallest-int initial-coll]
+  (remove #(= % smallest-int) initial-coll))
+
+
+
+(take-smallest-out 1 [1 1 2 3 4])
+
+(defn find-min-sort
+  [sorted-coll initial-coll]
+  (if (empty? initial-coll)
+    sorted-coll
+    (let [smallest-int (apply min initial-coll)]
+      (find-min-sort (conj sorted-coll smallest-int)
+                     (take-smallest-out smallest-int initial-coll)))))
+
+(comment
+  ;
+  (def data1 [0 12 2 3 0 0 0 1 2 3])
+
+  ;; call your final function here on data1 to ensure it works 
+  (find-min-sort [] data1))
+
+
 
 
 ;; Wendy solution
