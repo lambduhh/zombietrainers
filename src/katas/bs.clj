@@ -12,11 +12,10 @@
 
 
 
-(take-smallest-out 1 [1 1 2 3 4])
+
 
 (defn find-min-sort
   [sorted-coll initial-coll]
-  (println sorted-coll)
   (if (empty? initial-coll) 
     sorted-coll
     (let [smallest-int (apply min initial-coll)]
@@ -25,11 +24,12 @@
 
 
 
-(remove-first)
+
 (comment
   ;
   (def data1 [ 0 12 2 3 0 0 0 1 2 3 ] )
 
   ;; call your final function here on data1 to ensure it works 
   (find-min-sort [] data1)
+  (take-smallest-out 1 [1 1 2 3 4])
   )
