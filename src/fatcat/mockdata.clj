@@ -10,7 +10,19 @@
    :activity      :indoor                                   ;;keyword
    :goal          :maintain})                               ;;keyword
 
-(def skinny-cat {})
+(def skinny-cat
+  "this cat is fair to middlin weight"
+  {:weight-in-lbs 7
+   :sex           "female"
+   :age           5
+   :name          "BB"
+   :color         "black and white"
+   :breed         "calico"
+   :activity      :outdoor
+   :goal          :gain
+   :brand         "Purina"
+   :last-purchase "10 06 22"
+   :wet?          true})
 
 (def regular-cat
   "A regular-weight house cat, needs to maintain weight."
