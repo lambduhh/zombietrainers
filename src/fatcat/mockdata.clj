@@ -10,12 +10,9 @@
    :activity      :indoor                                   ;;keyword
    :goal          :maintain})                               ;;keyword
 
-(def skinny-cat {})
-
-
-(def regular-cat
-  "Fair to middlin weight range"
-  {:weight-in-lbs 10
+(def skinny-cat 
+  "this cat is fair to middlin weight"
+  {:weight-in-lbs 7
    :sex           "female"
    :age           5
    :name          "BB"
@@ -25,8 +22,11 @@
    :goal          :gain
    :brand         "Purina"
    :last-purchase "10 06 22"
-   :wet?          true
-   })
+   :wet?          true} )
+
+
+(def regular-cat
+  {})
 
 (def bags-of-fewd "In lbs, integer that represents the common sizes of food available for purchase in the US. "
   {:small   3.5
