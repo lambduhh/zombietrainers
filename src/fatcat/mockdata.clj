@@ -2,26 +2,7 @@
 
 ; Pet Food Calculator
 ; improvements: 
-; - provide several units of weight: kg, g, lb, oz so more flexible
 ; - gives result of how many bags of food need to purchase in a given time period (ex. how many bags per month)
-
-(def toffee-cat {:weight-kgs 4.1})
-
-(def liveclear-turkey-small
-  {:bag-lbs	           3.2
-   :bag-grams              1451.5
-   :bag-kg                 1.4515
-   :grams-per-kg-of-pet    12.5})
-
-(defn days-per-bag
-"Takes weight of animal (int), weight of bag (int), and amount of food per kg of animal. Returns number of daily servings per food bag."
-  [{:keys [weight-kgs]}
-   {:keys [bag-grams grams-per-kg-of-cat]}]
-  (/ bag-grams (* weight-kgs grams-per-kg-of-pet)))
-
-(days-per-bag toffee-cat liveclear-turkey-small) ;; => 28.3219512195122
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (def new-cat 
   {:weight {:unit {:kg 4.1 :lb 9}}})
@@ -30,38 +11,62 @@
  {:weight {:unit {:kg 1.4515 :lb 3.2 :g 1451.5}}
  ; :food-remaining {:unit {:kg (* x :lb) :g (* x :lb)}} ; does this idea belong here?
  ; :last-delivered x                                ; does this idea belong here?
- ; :is-low?                                        ; does this belong here?
+ ; :is-low? (returns true or false)                 ; does this belong here?
   :grams-per-kg-of-cat 12.5})
 
 (defn daily-serving
-"Takes weight of cat in kg and multiplies it by how many grams of food per kg of cat. Returns how much food to serve cat each day."
-  [{:keys [weight]}
-   {:keys [grams-per-kg-of-cat]}]
+"Takes 2 arguments: weight of cat in kg and how many grams of food per kg of cat needed. Multiplies it by how many grams of food per kg of cat. Returns how much food to serve cat each day"
+ [{{{:keys [kg]} :unit} :weight}
+  {:keys [grams-per-kg-of-cat]}]
   (* kg grams-per-kg-of-cat))
 
-{{:keys [kg]} {{:keys [unit]}} :weight}
-{{:keys [kg]} :unit}
-
-;; ex: {{:keys [width height]} :resolution}
-;; see "associative destructuring"
-
 (daily-serving new-cat liveclear-turkey)
+;; => 51.24999999999999
+
+(defn servings-per-bag
+"Takes weight of bag in grams and divides it by daily servings. Returns number of daily servings per food bag."
+ [{{{:keys [g]} :unit} :weight}]
+  (/ g (daily-serving new-cat liveclear-turkey)))
+
+(servings-per-bag liveclear-turkey)
+;; => 28.3219512195122
+
+;; conversion fns to work in later
+
+(defn kgs-to-lbs
+  [kgs]
+  (* kgs 2.20462))
+
+(kgs-to-lbs 1)
+;; => 2.20462
+
+(defn lbs-to-kgs
+  [lbs]
+  (* lbs 0.453592))
+
+(lbs-to-kgs 2)
+;; => 0.907184
+
+(defn grams-to-lbs
+  [grams]
+  (/ grams 453.592))
+
+(grams-to-lbs 1)
+;; => 0.0022046244201837776
+
+(defn lbs-to-grams
+  [lbs]
+  (* lbs 453.59))
+
+(lbs-to-grams 1)
+;; => 453.59
 
 ;;;;;;;; data to design:
 
-; MAYBE food remaining and/or last delivery date
+; food-remaining
+
+; last-delivered
+
+; is-low?
 
 ; maybe make each value for the weight key be a fn for conversion
-
-;;;;;;; fn to design:
-
-; working on it: fn that returns how much food to feed cat each day (servings per day)
-
-; is low?
-
-; fn that returns daily servings per bag (can modify existing)
-
-; lb to g ?
-
-; g to lb ?
-
