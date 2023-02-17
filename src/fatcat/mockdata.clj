@@ -16,20 +16,29 @@
 
 (defn daily-serving
 "Takes 2 arguments: weight of cat in kg and how many grams of food per kg of cat needed. Multiplies it by how many grams of food per kg of cat. Returns how much food to serve cat each day"
- [{{{:keys [kg]} :unit} :weight}
-  {:keys [grams-per-kg-of-cat]}]
+ [cat food]
   (* kg grams-per-kg-of-cat))
 
+
+
+(comment
+;
 (daily-serving new-cat liveclear-turkey)
-;; => 51.24999999999999
+  ;; => 51.24999999999999
+(get-in liveclear-turkey [:weight :unit :g])
+(get-in new-cat [:weight :unit :kg])
+;
+)
 
 (defn servings-per-bag
-"Takes weight of bag in grams and divides it by daily servings. Returns number of daily servings per food bag."
- [{{{:keys [g]} :unit} :weight}]
+  "Takes weight of bag in grams and divides it by daily servings. Returns number of daily servings per food bag."
+  [{{{:keys [g]} :unit} :weight}]
   (/ g (daily-serving new-cat liveclear-turkey)))
 
-(servings-per-bag liveclear-turkey)
-;; => 28.3219512195122
+(comment
+  (servings-per-bag liveclear-turkey)
+  ;; => 28.3219512195122
+)
 
 ;; conversion fns to work in later
 
