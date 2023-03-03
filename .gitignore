@@ -19,6 +19,12 @@ pom.xml.asc
 .nrepl-port
 .cpcache/
 
+## VsCode ##
+.calva
+
+## IntelliJ ##
+/.idea
+
 ### Emacs ###
 # -*- mode: gitignore; -*-
 *~
