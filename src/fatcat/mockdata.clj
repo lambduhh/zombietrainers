@@ -17,16 +17,14 @@
 (defn daily-serving
 "Takes 2 arguments: weight of cat in kg and how many grams of food per kg of cat needed. Multiplies it by how many grams of food per kg of cat. Returns how much food to serve cat each day"
  [cat food]
-  (* kg grams-per-kg-of-cat))
-
-
+  (* (get-in cat [:weight :unit :kg]) (get-in food [:grams-per-kg-of-cat])))
 
 (comment
 ;
 (daily-serving new-cat liveclear-turkey)
-  ;; => 51.24999999999999
-(get-in liveclear-turkey [:weight :unit :g])
 (get-in new-cat [:weight :unit :kg])
+(get-in liveclear-turkey [:grams-per-kg-of-cat])
+  ;; => 51.24999999999999
 ;
 )
 
