@@ -33,8 +33,13 @@
   [{{{:keys [g]} :unit} :weight}]
   (/ g (daily-serving new-cat liveclear-turkey)))
 
+(defn servings-per-bag
+  "Takes weight of bag in grams and divides it by daily servings. Returns number of daily servings per food bag"
+  [cat food] 
+  (/ (get-in food [:weight :unit :g]) (daily-serving cat food)))
+
 (comment
-  (servings-per-bag liveclear-turkey)
+  (servings-per-bag new-cat liveclear-turkey)
   ;; => 28.3219512195122
 )
 
